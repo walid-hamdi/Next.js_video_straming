@@ -7,7 +7,6 @@ import SectionCards from "../components/card/section-cards";
 import { getVideos, getPopularVideos } from "../lib/videos";
 
 export default function Home({ disneyVideo, travel, productivity, popular }) {
-  console.log({ disneyVideo, travel, productivity, popular });
   return (
     <div className={styles.container}>
       <Head>
@@ -50,8 +49,6 @@ export async function getServerSideProps() {
   const travel = await getVideos("travel");
   const productivity = await getVideos("productivity");
   const popular = await getPopularVideos();
-
-  console.log(disneyVideo);
 
   return {
     props: { disneyVideo, travel, productivity, popular },

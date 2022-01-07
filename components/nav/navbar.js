@@ -10,13 +10,16 @@ const Navbar = (props) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [username, setUsername] = useState("");
 
-  useEffect(async () => {
-    try {
-      const { email } = await magic.user.getMetadata();
-      setUsername(email);
-    } catch (err) {
-      console.log(err);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { email } = await magic.user.getMetadata();
+        setUsername(email);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
   }, []);
 
   const handleOnClickHome = (e) => {

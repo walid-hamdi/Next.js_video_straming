@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import Loading from "../components/loading/loading";
 import { magic } from "../lib/magic-client";
 import "../styles/globals.css";
@@ -22,13 +22,16 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  useEffect(async () => {
-    const isLoggedIn = await magic.user.isLoggedIn();
-    if (isLoggedIn) {
-      router.push("/");
-    } else {
-      router.push("/login");
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const isLoggedIn = await magic.user.isLoggedIn();
+      if (isLoggedIn) {
+        router.push("/");
+      } else {
+        router.push("/login");
+      }
+    };
+    fetchData();
   }, []);
 
   const jsx = isLoading ? <Loading /> : <Component {...pageProps} />;
